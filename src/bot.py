@@ -76,7 +76,7 @@ async def getPresentations(ctx):
 
 @bot.command(name='nextPresentation', help='Gets the next schedules presentation topic/presenter')
 async def getNext(ctx):
-     if not loadPres:
+    if not loadPres:
         responseText = "Unable to load presentations file!"
     else:
         responseText = ''
