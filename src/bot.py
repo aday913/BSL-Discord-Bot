@@ -17,7 +17,7 @@ try:
             i[3]
         ])
 except FileNotFoundError:
-  loadPres = False
+    loadPres = False
 
 from discord import errors
 from discord.ext import commands
