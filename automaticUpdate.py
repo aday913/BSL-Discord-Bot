@@ -71,4 +71,5 @@ def autoUpdate(updateTime='4:00'):
 
 if __name__ == '__main__':
     print('Running automaticUpdate.py as main')
-    autoUpdate()
+    while True:
+        autoUpdate()
