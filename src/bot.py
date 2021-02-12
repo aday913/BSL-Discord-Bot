@@ -99,7 +99,6 @@ async def getNext(ctx):
 async def getMyPresentation(ctx, myName):
     if not loadPres:
         responseText = "Unable to load presentations file!"
-<<<<<<< HEAD
     elif myName.lower() in presKeys:
         responseText = '{} presents on {}'.format(
             myName, presentations[CURRENT_TERM][myName.lower()])
@@ -107,21 +106,6 @@ async def getMyPresentation(ctx, myName):
         responseText = 'I don\'t see a presentation scheduled for {}.'.format(
             myName
         )
-=======
-    else:
-        responseText = ''
-        for date in formattedPresentations:
-            if date[1].lower() == myName.lower()
-
-                responseText = "{}/{} - {}".format(
-                    date[0].month, date[0].day, date[1]
-                )
-                break
-        if responseText == '':    
-            responseText = 'I don\'t see a presentation scheduled for {}.'.format(
-                myName.title()
-            )
->>>>>>> 6ad115000726578de92eed296162807ffd443ac3
 
     await ctx.send(responseText)
 
