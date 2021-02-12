@@ -10,8 +10,12 @@ try:
 
     CURRENT_TERM = 'spring2021'
 
+    presKeys = []
+    for key in presentations[CURRENT_TERM]:
+        presKeys.append(key)
+
     formattedPresentations = []
-    for i in presentations[CURRENT_TERM]:
+    for i in presentations[CURRENT_TERM]['schedule']:
         formattedPresentations.append([
             datetime.datetime(i[0], i[1], i[2], 12, 0),
             i[3]
@@ -95,18 +99,13 @@ async def getNext(ctx):
 async def getMyPresentation(ctx, myName):
     if not loadPres:
         responseText = "Unable to load presentations file!"
-    else:
-        responseText = ''
-        for date in formattedPresentations:
-            if date[1] == myName:
-                responseText = "{}/{} - {}".format(
-                    date[0].month, date[0].day, date[1]
-                )
-                break
-        if responseText == '':    
-            responseText = 'I don\'t see a presentation scheduled for {}.'.format(
-                myName
-            )
+    elif myName.lower() in presKeys:
+        responseText = '{} presents on {}'.format(
+            myName, presentations[CURRENT_TERM][myName.lower()])
+    else:    
+        responseText = 'I don\'t see a presentation scheduled for {}.'.format(
+            myName
+        )
 
     await ctx.send(responseText)
 
