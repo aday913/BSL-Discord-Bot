@@ -98,14 +98,14 @@ async def getMyPresentation(ctx, myName):
     else:
         responseText = ''
         for date in formattedPresentations:
-            if date[1] == myName
+            if date[1].lower() == myName.lower()
                 responseText = "{}/{} - {}".format(
                     date[0].month, date[0].day, date[1]
                 )
                 break
         if responseText == '':    
             responseText = 'I don\'t see a presentation scheduled for {}.'.format(
-                myName
+                myName.title()
             )
 
     await ctx.send(responseText)
