@@ -3,9 +3,12 @@ import json
 import datetime
 
 # Load in data files here:
-with open('../data/presentations.json', 'r') as f:
-    presentations = json.load(f)
-
+loadPres = True
+try:
+  with open('../data/presentations.json', 'r') as f:
+      presentations = json.load(f)
+except FileNotFoundError:
+  loadPres = False
 
 CURRENT_TERM = 'spring2021'
 
@@ -60,26 +63,32 @@ async def createVoiceChannel(ctx, channelName):
 
 @bot.command(name='presentations', help='Lists all presentations for the current term')
 async def getPresentations(ctx):
-    responseText = 'Presentation schedule:\n'
-    for date in formattedPresentations:
-        temp = '{}/{} - {}\n'.format(
-            date[0].month, date[0].day, date[1]
-        )
-        responseText = responseText + temp
+    if not loadPres:
+        responseText = "Unable to load presentations file!"
+    else:
+        responseText = 'Presentation schedule:\n'
+        for date in formattedPresentations:
+            temp = '{}/{} - {}\n'.format(
+                date[0].month, date[0].day, date[1]
+            )
+            responseText = responseText + temp
     await ctx.send(responseText)
 
 @bot.command(name='nextPresentation', help='Gets the next schedules presentation topic/presenter')
 async def getNext(ctx):
-    responseText = ''
-    current = datetime.datetime.now()
-    for date in formattedPresentations:
-        if current < date[0]:
-            responseText = '{}/{} - {}'.format(
-                date[0].month, date[0].day, date[1]
-            )
-            break
-        else:
-            responseText = "There's no more scheduled presentations!"
+     if not loadPres:
+        responseText = "Unable to load presentations file!"
+    else:
+        responseText = ''
+        current = datetime.datetime.now()
+        for date in formattedPresentations:
+            if current < date[0]:
+                responseText = '{}/{} - {}'.format(
+                    date[0].month, date[0].day, date[1]
+                )
+                break
+            else:
+                responseText = "There's no more scheduled presentations!"
     await ctx.send(responseText)
 
 @bot.event
