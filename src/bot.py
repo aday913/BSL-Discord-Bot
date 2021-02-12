@@ -5,7 +5,7 @@ import datetime
 # Load in data files here:
 loadPres = True
 try:
-    with open('../data/presentations.json', 'r') as f:
+    with open('data/presentations.json', 'r') as f:
         presentations = json.load(f)
 
     CURRENT_TERM = 'spring2021'
