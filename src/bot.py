@@ -5,7 +5,7 @@ import datetime
 # Load in data files here:
 loadPres = True
 try:
-    with open('../data/presentations.json', 'r') as f:
+    with open('data/presentations.json', 'r') as f:
         presentations = json.load(f)
 
     CURRENT_TERM = 'spring2021'
@@ -99,6 +99,7 @@ async def getMyPresentation(ctx, myName):
         responseText = ''
         for date in formattedPresentations:
             if date[1].lower() == myName.lower()
+
                 responseText = "{}/{} - {}".format(
                     date[0].month, date[0].day, date[1]
                 )

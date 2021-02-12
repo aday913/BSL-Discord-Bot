@@ -47,7 +47,7 @@ def runBot():
     Function runs "python3 bot.py" in the terminal window to run the bot
     '''
     print('Bringing bot back online...')
-    pyautogui.typewrite('python3 bot.py')
+    pyautogui.typewrite('python3 src/bot.py')
     pyautogui.press('enter')
     return
 
