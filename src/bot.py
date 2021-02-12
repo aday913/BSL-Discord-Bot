@@ -91,6 +91,25 @@ async def getNext(ctx):
                 responseText = "There's no more scheduled presentations!"
     await ctx.send(responseText)
 
+@bot.command(name='whenDoIPresent', help='Tell when you present')
+async def getMyPresentation(ctx, myName):
+    if not loadPres:
+        responseText = "Unable to load presentations file!"
+    else:
+        responseText = ''
+        for date in formattedPresentations:
+            if date[1] == myName
+                responseText = "{}/{} - {}".format(
+                    date[0].month, date[0].day, date[1]
+                )
+                break
+        if responseText == '':    
+            responseText = 'I don\'t see a presentation scheduled for {}.'.format(
+                myName
+            )
+
+    await ctx.send(responseText)
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.errors.CheckFailure):
