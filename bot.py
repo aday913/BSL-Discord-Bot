@@ -1,4 +1,18 @@
 import os
+import json
+import datetime
+
+with open('presentations.json', 'r') as f:
+    presentations = json.load(f)
+
+CURRENT_TERM = 'spring2021'
+
+formattedPresentations = []
+for i in presentations[CURRENT_TERM]:
+    formattedPresentations.append([
+        datetime.datetime(i[0], i[1], i[2], 12, 0),
+        i[3]
+    ])
 
 from discord import errors
 from discord.ext import commands
@@ -41,6 +55,30 @@ async def createVoiceChannel(ctx, channelName):
     existing_channel = utils.get(guild.channels, name=channelName)
     if not existing_channel:
         await guild.create_voice_channel(channelName)
+
+@bot.command(name='presentations', help='Lists all presentations for the current term')
+async def getPresentations(ctx):
+    responseText = 'Presentation schedule:\n'
+    for date in formattedPresentations:
+        temp = '{}/{} - {}\n'.format(
+            date[0].month, date[0].day, date[1]
+        )
+        responseText = responseText + temp
+    await ctx.send(responseText)
+
+@bot.command(name='nextPresentation', help='Gets the next schedules presentation topic/presenter')
+async def getNext(ctx):
+    responseText = ''
+    current = datetime.datetime.now()
+    for date in formattedPresentations:
+        if current < date[0]:
+            responseText = '{}/{} - {}'.format(
+                date[0].month, date[0].day, date[1]
+            )
+            break
+        else:
+            responseText = "There's no more scheduled presentations!"
+    await ctx.send(responseText)
 
 @bot.event
 async def on_command_error(ctx, error):
