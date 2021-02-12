@@ -63,6 +63,7 @@ def autoUpdate(updateTime='4:00'):
         alreadyRan = True
         stopBot()
         pullRepo()
+        runBot()
     elif currentTime != updateTime:
         # Once the update has been ran, we reset alreadyRan to False
         alreadyRan = False
