@@ -101,10 +101,10 @@ async def getMyPresentation(ctx, myName):
         responseText = "Unable to load presentations file!"
     elif myName.lower() in presKeys:
         responseText = '{} presents on {}'.format(
-            myName, presentations[CURRENT_TERM][myName.lower()])
+            myName.title(), presentations[CURRENT_TERM][myName.lower()])
     else:    
-        responseText = 'I don\'t see a presentation scheduled for {}.'.format(
-            myName
+        responseText = 'Don\'t see a presentation scheduled for {}.'.format(
+            myName.title()
         )
 
     await ctx.send(responseText)
