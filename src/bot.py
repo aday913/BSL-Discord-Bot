@@ -5,19 +5,21 @@ import datetime
 # Load in data files here:
 loadPres = True
 try:
-  with open('../data/presentations.json', 'r') as f:
-      presentations = json.load(f)
+    with open('../data/presentations.json', 'r') as f:
+        presentations = json.load(f)
+
+    CURRENT_TERM = 'spring2021'
+
+    formattedPresentations = []
+    for i in presentations[CURRENT_TERM]:
+        formattedPresentations.append([
+            datetime.datetime(i[0], i[1], i[2], 12, 0),
+            i[3]
+        ])
 except FileNotFoundError:
   loadPres = False
 
-CURRENT_TERM = 'spring2021'
 
-formattedPresentations = []
-for i in presentations[CURRENT_TERM]:
-    formattedPresentations.append([
-        datetime.datetime(i[0], i[1], i[2], 12, 0),
-        i[3]
-    ])
 
 from discord import errors
 from discord.ext import commands
