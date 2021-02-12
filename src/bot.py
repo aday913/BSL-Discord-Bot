@@ -3,10 +3,9 @@ import json
 import datetime
 
 # Load in data files here:
-os.chdir('data')
-with open('presentations.json', 'r') as f:
+with open('../data/presentations.json', 'r') as f:
     presentations = json.load(f)
-os.chdir('../')
+
 
 CURRENT_TERM = 'spring2021'
 
