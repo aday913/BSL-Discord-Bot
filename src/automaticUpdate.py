@@ -51,13 +51,14 @@ def runBot():
     pyautogui.press('enter')
     return
 
-def autoUpdate(updateTime='4:00'):
+def autoUpdate(updateHour=4, updateMinute=0):
     '''
     Function runs continuously to see if the time is right for an update!
     '''
     now = datetime.datetime.now()
-    currentTime = '{}:{}'.format(now.hour, now.minute)
-    if currentTime == updateTime and not alreadyRan:
+    correctHour = (now.hour == updateHour)
+    correctMinute = (now.minute == updateMinute)
+    if correctHour and correctMinute and not alreadyRan:
         # If the time is right and we haven't already ran an update, then
         # we stop the bot and pull from the repo
         alreadyRan = True
