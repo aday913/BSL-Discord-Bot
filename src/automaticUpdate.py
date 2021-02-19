@@ -58,6 +58,7 @@ def autoUpdate(updateHour=4, updateMinute=0):
     now = datetime.datetime.now()
     correctHour = (now.hour == updateHour)
     correctMinute = (now.minute == updateMinute)
+    alreadyRan = None
     if correctHour and correctMinute and not alreadyRan:
         # If the time is right and we haven't already ran an update, then
         # we stop the bot and pull from the repo
